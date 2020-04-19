@@ -1,4 +1,4 @@
-from jpisclubs.settings.common import *
+from jpisclubs.common import *
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = False
 ALLOWED_HOSTS = ['jpisclubs.herokuapp.com']
