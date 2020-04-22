@@ -15,7 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
+from signin import views as viewsignin
 
 urlpatterns = [
+    url(r'^$',viewsignin.login,name='login'),
+    url(r'^signup/',viewsignin.signup,name='signup'),
+    url(r'^signin/password_reset/',viewsignin.password_reset,name='password_reset'),
     path('admin/', admin.site.urls),
 ]

@@ -1,0 +1,36 @@
+{%extends "signin/base.html"%}
+<!DOCTYPE html>
+{%load staticfiles%}
+{%block css%}
+  <link rel="stylesheet" href="{%static "signin/login.css"%}">
+{%endblock%}
+{%block body%}
+<a id="signup"href="{%url 'signup'%}"><h3>Sign Up</h3></a>
+<div class="body">
+  <div id='title'>
+    <span>
+      Sign In
+    </span>
+  </div>
+  <form class="" action="index.html" method="post">
+    {%csrf_token%}
+    <div class="INPUT">
+      <div class="triangle-left"></div>
+      <input type="email" name="email" value=""placeholder="Email"required>
+      <div class="triangle-right"></div>
+    </div>
+    <br>
+    <div class="INPUT">
+      <div class="triangle-left"></div>
+      <input type="password" name="pwd" value=""placeholder="Password"required>
+      <div class="triangle-right"></div>
+    </div>
+    <a id="forgotp"href="{%url 'password_reset'%}"><h3>Forgot Password?</h3></a>
+    <div class="INPUT">
+      <input type="submit" name="" value="Sign In">
+    </div>
+
+
+  </form>
+</div>
+{%endblock%}
