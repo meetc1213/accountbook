@@ -1,0 +1,49 @@
+{% extends "dashboard/base.html" %}
+<!doctype html>
+{%load static %}
+{% block title %}
+<title>Home</title>
+{% endblock %}
+{%block css%}
+<link rel="stylesheet" href="{% static 'dashboard/home/home.css' %}">
+{%endblock%}
+{% block body %}
+
+
+<div class="bg home_head">
+  <div class="header container-fluid">
+    <h1> {{greet}} <br>{{fname}}!</h1>
+  </div>
+</div>
+<div class="services container-fluid">
+  <h2>Something you can do</h2>
+  <div class="break"></div>
+  <div class="activity">
+    <img src="{% static 'dashboard/home/think.webp' %}" alt="">
+    <div class="container">
+      <h3>THINK</h3>
+      <p>Think a radical idea.<br>Find the purpose.<br>Brainstorm!</p>
+    </div>
+  </div>
+  <div class="activity">
+    <img src="{% static 'dashboard/home/create.png' %}" alt="">
+    <div class="container">
+      <h3>CREATE</h3>
+      <p>Create an organisation,<br>recruit members and <br>conduct events.</p>
+    </div>
+
+  </div>
+  <div class="activity">
+    <img src="{% static 'dashboard/home/share.png' %}" alt="">
+    <div class="container">
+      <h3>GROW</h3>
+      <p>Increase your outreach.<br> Reach out to the<br>community.</p>
+    </div>
+  </div>
+</div>
+{%block js%}
+<script src="{% static 'dashboard/home/home.js' %}">
+
+</script>
+{%endblock%}
+{% endblock %}

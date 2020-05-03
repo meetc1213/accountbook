@@ -1,0 +1,14 @@
+{% extends "dashboard/base.html" %}
+<!doctype html>
+{%load static %}
+{% block title %}
+<title>Notifications</title>
+{% endblock %}
+{%block css%}
+<link rel="stylesheet" href="{% static 'dashboard/notifications/notifications.css' %}">
+{%endblock%}
+{% block body %}
+<div class="bg other_tabs">
+  <h1 id="title">See what's up.</h1>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{%extends "signin/base.html"%}
+<!DOCTYPE html>
+{% load static %}
+{%block title%}
+<title>Verify</title>
+{%endblock%}
+{%block css%}
+  <link rel="stylesheet" href="{%static "signin/signup.css"%}">
+{%endblock%}
+{%block body%}
+<a id="signin"href="{%url 'signin'%}"><h3>Sign In</h3></a>
+<div class="body">
+  <div id='title'>
+    <span>
+      Sign Up
+    </span>
+  </div>
+    <form class="" action="{% url 'code_verify' %}" method="POST">
+        {%csrf_token%}
+        <h3>Please enter the 6 digit code sent to your email</h3>
+        <br>
+        <br>
+        <h2>{{invalid}}</h2>
+      <div class="INPUT">
+        <div class="triangle-left"></div>
+        <input id="code" type="text" onkeypress="return /[0-9]/i.test(event.key)"maxlength="6"minlength="6" name="vcode" value=""placeholder="6 digit code" required>
+        <div class="triangle-right"></div>
+      </div>
+      <div class="INPUT">
+        <input id="submit_signup"type="submit" name="" value="Verify">
+      </div>
+    </form>
+</div>
+
+{%endblock%}

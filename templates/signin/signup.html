@@ -1,51 +1,79 @@
 {%extends "signin/base.html"%}
 <!DOCTYPE html>
-{%load staticfiles%}
+{% load static %}
+{%block title%}
+<title>Sign Up</title>
+{%endblock%}
 {%block css%}
   <link rel="stylesheet" href="{%static "signin/signup.css"%}">
 {%endblock%}
 {%block body%}
-<a id="signin"href="{%url 'login'%}"><h3>Sign In</h3></a>
+<a id="signin"href="{%url 'signin'%}"><h3>Sign In</h3></a>
 <div class="body">
   <div id='title'>
     <span>
       Sign Up
     </span>
   </div>
-  <form class="" action="" method="post">
+  <form class="" action="{% url 'signup' %}" method="POST">
     {%csrf_token%}
+    {% if err %}
+    <h3>Your email is already registered. Kindly signin or reset your password</h3>
+    {% endif%}
+
+    {% if name_err == True %}
+      <h3 id="errors">Please include first name and last name</h3>
+    {% endif %}
     <div class="INPUT">
       <div class="triangle-left"></div>
-      <input type="text" pattern="[a-zA-Z][a-zA-Z ]+" title="Please use only alphabets"   name="name" value=""placeholder="Full Name" required>
+      {% if errors %}
+      <input id="name"type="text" pattern="[a-zA-Z][a-zA-Z ]+" title="Please use only alphabets"   name="name" value={{Name}} placeholder="Full Name" required>
+      {% else %}
+      <input id="name"type="text" pattern="[a-zA-Z][a-zA-Z ]+" title="Please use only alphabets"   name="name" value="" placeholder="Full Name" required>
+      {% endif %}
       <div class="triangle-right"></div>
     </div>
     <div class="INPUT">
       <div class="triangle-left"></div>
-      <input type="number" onkeypress="return /[0-9]/i.test(event.key)" min="1" max="12" name="grade" value=""placeholder="Grade"required>
+      {% if errors %}
+      <input type="number" onkeypress="return /[0-9]/i.test(event.key)" min="1" max="12" name="grade" value={{grade}} placeholder="Grade"required>
+      {% else %}
+      <input type="number" onkeypress="return /[0-9]/i.test(event.key)" min="1" max="12" name="grade" value="" placeholder="Grade"required>
+      {% endif %}
       <div class="triangle-right"></div>
     </div>
     <div class="INPUT">
       <div class="triangle-left"></div>
-      <input type="text" onkeypress="return /[a-z]/i.test(event.key)" pattern="[A-H]{1}" title="Enter a capital letter between A and H"name="section" value=""placeholder="Section"required>
+      {% if errors %}
+      <input type="text" onkeypress="return /[a-z]/i.test(event.key)" pattern="[A-H]{1}" title="Enter a capital letter between A and H"name="section" value="{{section}}" placeholder="Section"required>
+      {% else %}
+      <input type="text" onkeypress="return /[a-z]/i.test(event.key)" pattern="[A-H]{1}" title="Enter a capital letter between A and H"name="section" value="" placeholder="Section"required>
+      {% endif %}
       <div class="triangle-right"></div>
     </div>
     <div class="INPUT">
       <div class="triangle-left"></div>
-      <input type="email" name="email" value=""placeholder="Email"required>
+      {% if errors %}
+      <input type="email" name="email" pattern=".+jpischool.com" value={{Email}} placeholder="example@jpischool.com" title="Please use school email only"required>
+      {% else %}
+      <input type="email" name="email" pattern=".+jpischool.com" value="" placeholder="example@jpischool.com" title="Please use school email only"required>
+      {% endif %}
       <div class="triangle-right"></div>
     </div>
     <br>
     <div class="INPUT">
       <div class="triangle-left"></div>
-      <input type="password" name="pwd" value=""pattern=".{6,}"title="It must be atleast 6 characters long" placeholder="Password"required>
+      {% if errors %}
+      <input type="password" name="pwd" value={{Password}} pattern=".{6,}"title="It must be atleast 6 characters long" placeholder="Password"required>
+      {% else %}
+      <input type="password" name="pwd" value="" pattern=".{6,}"title="It must be atleast 6 characters long" placeholder="Password"required>
+      {% endif %}
       <div class="triangle-right"></div>
     </div>
 
     <div class="INPUT">
-      <input type="submit" name="" value="Sign Up">
+      <input id="submit_signup"type="submit" name="" value="Sign Up">
     </div>
-
-
   </form>
 </div>
 

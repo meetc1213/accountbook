@@ -2,7 +2,8 @@ html {
   height: 100%;
   background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
   overflow: hidden;
-  font-family: "lato", sans-serif;
+  font-family: "lato", sans-serif!important;
+  color:white!important;
 }
 
 #stars {
@@ -85,16 +86,19 @@ html {
   flex-direction: column;
 }
 form{
+  position: relative;
   font-size: 20px;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: 0.5s
 }
 h3{
   margin-top: 0px;
-  margin-bottom: 20px;
+  margin-bottom: 30px!important;
+  text-align: center;
 }
 #signup,#signin{
   position: absolute;
@@ -112,6 +116,7 @@ input{
   margin-bottom: 20px;
   border-radius: 0px;
   height: 49px;
+  color: black!important
 }
 .triangle-left {
 	width: 0;
@@ -129,9 +134,9 @@ input{
 }
 input[type=submit]{
   background:rgba(255,255,255,0);
-  color: white;
+  color: white!important;
 }
-a,a:hover{
+a,a:hover,h3,h4,h2{
   color: white!important;
 
 }
