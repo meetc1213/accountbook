@@ -4,7 +4,6 @@ from django.contrib import admin
 from signin.models import profile
 
 
-# Register your models here.
 class profileInline(admin.StackedInline):
     model = profile
     can_delete = False
