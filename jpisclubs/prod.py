@@ -1,6 +1,6 @@
 from jpisclubs.common import *
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['jpisclubs.herokuapp.com']
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
