@@ -14,7 +14,6 @@ from datetime import datetime
 def home(request,**kargs):
     user=request.user
     x=int(datetime.now().hour)
-    print(x)
     greeting=" "
     if x<12 or x==24:
         greeting="Good Morning"

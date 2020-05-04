@@ -1,4 +1,4 @@
-from django.shortcuts import render,get_object_or_404,redirect
+from django.shortcuts import render
 from django.contrib.auth.models import User
 from signin.models import profile
 from django.contrib import auth
@@ -28,6 +28,8 @@ pwd_change_user=""
 def signin(request):
     global registered
     message={'registered':registered,'pwd_change':pwd_change}
+    from django.apps import apps
+
     if request.user.is_authenticated:
         print("HoUSTON, WE HAVE A PROBLEM")
 
