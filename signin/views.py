@@ -30,8 +30,9 @@ def signin(request):
     message={'registered':registered,'pwd_change':pwd_change}
     if request.user.is_authenticated:
         print("HoUSTON, WE HAVE A PROBLEM")
+
     if request.method=='POST':
-        user =authenticate(username=request.POST['email'],password=request.POST['pwd'])
+        user =authenticate(username=request.POST.get('email'),password=request.POST.get('pwd'))
         if user:
             if user.is_active:
                 login(request, user)
@@ -89,10 +90,6 @@ def lg_out(request):
     request.session.flush()
     request.user = AnonymousUser
     logout(request)
-
-
-    print("TRIED")
-    return redirect('signin')
 def signup(request):
 
     if request.method=='POST':
@@ -122,7 +119,7 @@ def signup(request):
             code=randint(100000,999999)
             mail=('Email Verification',"Hello "+Name[0]+" "+Name[1]+",\n\nThank you for taking the first step. Your 6-digit code for email verification is "+str(code),settings.EMAIL_HOST_USER,[Email])
             send_mass_mail((mail,),fail_silently=False,)
-            return render(request,'signin/email_verification.html',{'email':Email})
+            return redirect('code_verify')
     return render(request,'signin/signup.html',context={'errors':False})
 
 def code_verify(request):
@@ -136,7 +133,7 @@ def code_verify(request):
     if request.method=='POST':
 
         if request.POST['vcode']==str(code):
-
+            print("VERIFYIED")
             user = User.objects.create_user( username=Email,
             first_name=Name[0],last_name=Name[1],email=Email, password=Password)
             user.set_password(Password)
@@ -146,11 +143,9 @@ def code_verify(request):
             profile1.user=user
             profile1.Class=Class
             profile1.save()
-            Name=""
-            Class=""
-            Email=""
-            Password=""
+            print("user SAVED")
             registered=True
+            print("FUCK IT")
             return redirect('signin')
         else:
             values['err']=True
