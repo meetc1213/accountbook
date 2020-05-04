@@ -7,7 +7,12 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from datetime import datetime
+import os
+import psycopg2
+# Create your views here.
+DATABASE_URL = os.environ['DATABASE_URL']
 
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required(login_url='')
 

@@ -11,7 +11,12 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate,login,logout
+import os
+import psycopg2
 # Create your views here.
+DATABASE_URL = os.environ['DATABASE_URL']
+
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 Name=""
 Class=""
 Email=""
