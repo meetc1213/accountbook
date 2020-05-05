@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
 from signin.models import profile
 from django.contrib import auth
@@ -11,12 +11,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate,login,logout
-import os
-import psycopg2
-# Create your views here.
-DATABASE_URL = os.environ['DATABASE_URL']
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# Create your views here.
+
 Name=""
 Class=""
 Email=""

@@ -139,7 +139,5 @@ STATICFILES_DIRS=[
 # MEDIA INFORMATION:
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
-import dj_database_url
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 LOGIN_URL='signin/signin.html'
