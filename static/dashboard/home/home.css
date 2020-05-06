@@ -2,6 +2,8 @@
 .home_head{
   background-image: url("bg/bg.jpg");
   height: 100%;
+  position: relative
+  width: 100%;
 }
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 .header h1{
@@ -10,17 +12,17 @@
   color: white;
   font-size: 120px!important;
   font-family: 'Ubuntu', sans-serif;
-  text-align: right;
   opacity: 0%;
   transition: 1.5s;
   margin-bottom: 0;
   text-align: center;
+  margin-top: 5%;
 }
 .header{
   height: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: baseline;
 }
 .services img{
   border-radius: 50%;
