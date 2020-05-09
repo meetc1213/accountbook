@@ -1,7 +1,7 @@
 
 .home_head{
-  background-image: url("bg/bg.jpg");
-  height: 100%;
+  background-image:  linear-gradient(rgba(0,0,0,.7),rgba(0,0,0,.2)),url("bg/bg.jpg");
+  height: 700px;
   position: relative
   width: 100%;
 }
@@ -16,7 +16,7 @@
   transition: 1.5s;
   margin-bottom: 0;
   text-align: center;
-  margin-top: 5%;
+  top: 140px; 
 }
 .header{
   height: 100%;

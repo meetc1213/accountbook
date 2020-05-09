@@ -44,8 +44,8 @@
     <li class="nav-item avatar dropdown">
       <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
-        <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0"
-          alt="avatar image">
+        <i class="fa fa-user" aria-hidden="true"></i>
+
       </a>
       <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
         aria-labelledby="navbarDropdownMenuLink-55">
@@ -59,11 +59,76 @@
 </nav>
   <h1 id="title">Create Your Dream.</h1>
 </div>
-<div class="container form">
-  <form class="" action="index.html" method="post">
-    <label for="club_name"></label>
-    <input type="text" id="club_name"name="club_name" value="">
-  </form>
-</div>
+<div class="container form jumbotron">
 
+    <form class="" action="{% url 'create' user.username %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="avtcontainer">
+          <div class="avatar-upload">
+              <div class="avatar-edit">
+                  <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                  <label for="imageUpload"></label>
+              </div>
+              <div class="avatar-preview">
+                  <div id="imagePreview" >
+                    <h3 id="iminst">Upload Your Logo</h3>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="inp">
+        <label for="club_name">Name of the club/organisation</label><br>
+        <input type="text" id="club_name"name="club_name" value=""required><br>
+      </div>
+      <div class="inp">
+        <label for="club_moto">Add a moto for your club/organisation (optional)</label><br>
+        <input type="text" id="club_moto"name="club_moto" value=""><br>
+      </div>
+      <div class="inp">
+        <label for="descrip">Brief description of your club/organisation</label><br>
+        <textarea name="club_descrip" id="descrip"required></textarea>
+      </div>
+      <div class="inp">
+        <label for="purpose">Purpose of your club/organisation</label><br>
+        <textarea name="club_purpose" id="purpose"required></textarea>
+      </div>
+      <div class="est inp">
+        <div class="left">
+          <label for="mem_size">Estimated member size</label><br>
+          <input type="text" onkeypress="return /[0-9]/i.test(event.key)" min="1" name="mem_size"id="mem_size" value=""required>
+        </div>
+        <div class="right">
+          <label for="meet_no">Estimated number of events per year</label>
+          <input type="text" onkeypress="return /[0-9]/i.test(event.key)" min="1" name="meet_no"id="meet_no" value=""required>
+        </div>
+      </div>
+      <div class="inp">
+        <label for="activites">Activities the club or organisation anticipates for the coming year</label><br>
+        <textarea name="club_activites" id="Activities"required></textarea>
+      </div>
+      <input type="submit" class="btn btn-info" value="Create!">
+    </form>
+
+
+</div>
 {% endblock %}
+{%block js%}
+
+<script>
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $('#iminst').html("");
+            $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+            // $('#imagePreview').fadeIn(650);
+            $('.avatar-preview').css('border-color','rgb(160, 164, 171)')
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $("#imageUpload").change(function() {
+    readURL(this);
+  });
+</script>
+{%endblock%}

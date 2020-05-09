@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
-
+from jpisclubs import common
+from django.conf.urls import static
 urlpatterns = [
 path("home",views.home,name='home'),
 path("create",views.create,name='create'),
