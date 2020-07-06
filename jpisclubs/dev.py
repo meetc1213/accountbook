@@ -1,6 +1,6 @@
 from jpisclubs.common import *
 SECRET_KEY = '@(g2e0_lg1i@3y1&u57hw)bzr#vnh1!-_j5x-vr7)%+o*%^c)%'
-DEBUG = True
+
 ALLOWED_HOSTS = ['*']
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,8 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap');
-html,body{width: 100%;height:100%;}
+html,body{width: 100%;}
+body{background: whitesmoke;}
 .navbar{
-  background-color:black;
+  background-color:transparent!important;
   color: white;
+  z-index: 1;
 }
 .rounded-circle{
   width: 50%;
@@ -31,7 +33,7 @@ html,body{width: 100%;height:100%;}
 #title{
   color: white;
   font-size: 100px;
-  height: 100%;
+  height: 50%;
   text-align: center;
   font-family: 'Oswald', sans-serif;
   display: flex;
@@ -44,7 +46,7 @@ html,body{width: 100%;height:100%;}
   background-size: cover;
 }
 .other_tabs{
-  height: 50%;
+  height: 400px;
 }
 .page-footer{
   background-color: black;
@@ -56,4 +58,7 @@ html,body{width: 100%;height:100%;}
 }
 .useful_link a{
   color: white!important;
+}
+.fa-user{
+  font-size: 30px!important;
 }
