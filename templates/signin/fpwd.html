@@ -25,14 +25,14 @@
             <h3>The passwords don't match!</h3>
           {% endif %}
           <div class="INPUT">
-            <div class="triangle-left"></div>
+
             <input type="password" name="npwd" value=""placeholder="New Password"required>
-            <div class="triangle-right"></div>
+
           </div>
           <div class="INPUT">
-            <div class="triangle-left"></div>
+
             <input type="password" name="cnpwd" value=""placeholder="Confirm New Password"required>
-            <div class="triangle-right"></div>
+
           </div>
         {% else %}
           {% if verr == True %}
@@ -41,9 +41,9 @@
           <h3>Please enter the 6 digit code sent to your email
          </h3>
           <div class="INPUT">
-            <div class="triangle-left"></div>
+
             <input type="text" onkeypress="return /[0-9]/i.test(event.key)"maxlength="6"minlength="6" name="rcode" value=""placeholder="6 digit code" required>
-            <div class="triangle-right"></div>
+
           </div>
         {% endif %}
 
@@ -53,9 +53,9 @@
           <h3>No account associated with given email</h3>
         {% endif %}
         <div class="INPUT">
-          <div class="triangle-left"></div>
+
           <input type="email" name="email" pattern=".+jpischool.com"value=""placeholder="Email"title="Please use school email."required>
-          <div class="triangle-right"></div>
+
         </div>
     {% endif %}
 
