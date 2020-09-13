@@ -47,8 +47,8 @@ def signin(request):
     return render(request,'signin/signin.html',context=message)
 @csrf_protect
 def password_reset(request):
-
     if request.method=='POST':
+        print("INSIDE POST")
         global sent
         global fcode
         global pwd_change_user
@@ -86,7 +86,8 @@ def password_reset(request):
                 else:
                     return render(request,'signin/fpwd.html',
                     context={'err':False,'sent':True,'verified':True,'dpwderr':True})
-    return render(request,'signin/fpwd.html',context={'sent':sent})
+    print("Not posted yet")
+    return render(request,'signin/fpwd.html',context={'sent':False})
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @login_required
