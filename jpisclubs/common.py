@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 ]
 SITE_ID = 1
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -60,7 +61,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
 ROOT_URLCONF = 'jpisclubs.urls'
 
 TEMPLATES = [
@@ -151,7 +151,10 @@ STATICFILES_DIRS=[
 # MEDIA INFORMATION:
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+SECRET_KEY = '@(g2e0_lg1i@3y1&u57hw)bzr#vnh1!-_j5x-vr7)%+o*%^c)%'
+ALLOWED_HOSTS = ['*']
 
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
 LOGIN_URL='signin/signin.html'
 LOGIN_REDIRECT_URL = "/home"
 ACCOUNT_EMAIL_REQUIRED = True
