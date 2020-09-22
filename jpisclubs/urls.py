@@ -7,6 +7,6 @@ from jpisclubs import common
 from django.conf.urls.static import static
 urlpatterns = [
     path('',include('signin.urls')),
-    path('<str:username>/',include('dashboard.urls')),
+    path('',include('dashboard.urls'),name='dashboard'),
     path('admin/', admin.site.urls),
 ]+ static(common.MEDIA_URL,document_root=common.MEDIA_ROOT)

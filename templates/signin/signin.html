@@ -1,4 +1,6 @@
 {%extends "signin/base.html"%}
+{% load socialaccount %}
+{% providers_media_js %}
 <!DOCTYPE html>
 {% load static %}
 {%block title%}
@@ -8,7 +10,10 @@
   <link rel="stylesheet" href="{%static "signin/signin.css"%}">
 {%endblock%}
 {%block body%}
-<a id="signup"href="{%url 'signup'%}"><h3>Sign Up</h3></a>
+<a id="signup"href="{%url 'signup'%}"><h3>Sign Up</h3></a><br>
+<a id="google"href="{% provider_login_url "google" %}"><h3>Google</h3></a>
+<a id="google"href="https://dev.to/gajesh/the-complete-django-allauth-guide-la3"target="blank"><h3>Gajesh</h3></a>
+<a id="google"href="https://learnbatta.com/blog/signup-sign-in-using-google-to-django-application-8/"target="blank"><h3>Gajesh</h3></a>
 <div class="body">
   <div id='title'>
     <span>

@@ -6,7 +6,7 @@
 {% endblock %}
 {% block body %}
 <nav id="topnav"class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1">
-  <a class="navbar-brand" href="{% url 'home' user.username%}">Jpis Clubs</a>
+  <a class="navbar-brand" href="{% url 'home' %}">Jpis Clubs</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
     aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,20 +14,20 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
     <ul class="navbar-nav">
       <li class="nav-item tabs {{h_active}}">
-        <a class="nav-link" href="{% url 'home' user.username%}">Home
+        <a class="nav-link" href="{% url 'home' %}">Home
         </a>
       </li>
       <li class="nav-item tabs {{c_active}}">
-        <a class="nav-link" href="{% url 'create' user.username%}">Create</a>
+        <a class="nav-link" href="{% url 'create' %}">Create</a>
       </li>
       <li class="nav-item tabs {{j_active}}">
-        <a class="nav-link" href="{% url 'join' user.username %}">Join</a>
+        <a class="nav-link" href="{% url 'join'  %}">Join</a>
       </li>
       <li class="nav-item tabs {{m_active}}">
-        <a class="nav-link" href="{% url 'manage' user.username %}">Manage</a>
+        <a class="nav-link" href="{% url 'manage'  %}">Manage</a>
       </li>
       <li class="nav-item tabs {{n_active}}">
-        <a class="nav-link" href="{% url 'notifications' user.username %}">Notifications</a>
+        <a class="nav-link" href="{% url 'notifications'  %}">Notifications</a>
       </li>
     </ul>
     <ul class="navbar-nav  nav-flex-icons">
@@ -43,7 +43,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
           aria-labelledby="navbarDropdownMenuLink-55">
-          <a class="dropdown-item" href="{% url 'profile' user.username %}">Your Profile</a>
+          <a class="dropdown-item" href="{% url 'profile'  %}">Your Profile</a>
           <a class="dropdown-item" href="{% url 'lg_out'%}">Log Out</a>
 
         </div>
