@@ -1,8 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from signin.models import profile
 from django.contrib import auth
-from django.core.mail import send_mass_mail
+from django.core.mail import send_mail
 from django.conf import settings
 from random import randint
 import re
@@ -11,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_control
 from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate,login,logout
-
+from signin.models import clubs
 # from datetime import datetime
 # from urllib import urlencode
 # from django.conf import settings
@@ -33,205 +32,118 @@ pwd_change_user=""
 
 @cache_control(no_cache=True, must_revalidate=True)
 @csrf_protect
-def gsignin(request):
-    return 1    
-
-#     redirect_uri = "%s://%s%s" % (
-#         request.scheme, request.get_host(), reverse('pain:google_login')
-#     )
-#     if('code' in request.GET):
-#         params = {
-#             'grant_type': 'authorization_code',
-#             'code': request.GET.get('code'),
-#             'redirect_uri': redirect_uri,
-#             'client_id': settings.GP_CLIENT_ID,
-#             'client_secret': settings.GP_CLIENT_SECRET
-#         }
-#         url = 'https://accounts.google.com/o/oauth2/token'
-#         response = requests.post(url, data=params)
-#         url = 'https://www.googleapis.com/oauth2/v1/userinfo'
-#         access_token = response.json().get('access_token')
-#         response = requests.get(url, params={'access_token': access_token})
-#         user_data = response.json()
-#         email = user_data.get('email')
-#         if email:
-#             user, _ = User.objects.get_or_create(email=email, username=email)
-#             gender = user_data.get('gender', '').lower()
-#             if gender == 'male':
-#                 gender = 'M'
-#             elif gender == 'female':
-#                 gender = 'F'
-#             else:
-#                 gender = 'O'
-#             data = {
-#                 'first_name': user_data.get('name', '').split()[0],
-#                 'last_name': user_data.get('family_name'),
-#                 'google_avatar': user_data.get('picture'),
-#                 'gender': gender,
-#                 'is_active': True
-#             }
-#             user.__dict__.update(data)
-#             user.save()
-#             user.backend = settings.AUTHENTICATION_BACKENDS[0]
-#             login(request, user)
-#         else:
-#             messages.error(
-#                 request,
-#                 'Unable to login with Gmail Please try again'
-#             )
-#         return redirect('/')
-#     else:
-#         url = "https://accounts.google.com/o/oauth2/auth?client_id=%s&response_type=code&scope=%s&redirect_uri=%s&state=google"
-#         scope = [
-#             "https://www.googleapis.com/auth/userinfo.profile",
-#             "https://www.googleapis.com/auth/userinfo.email"
-#         ]
-#         scope = " ".join(scope)
-#         url = url % (settings.GP_CLIENT_ID, scope, redirect_uri)
-#         return redirect(url)
-
-
-
-
-
-
-
-
-
-
-
-def home(request):
-     return render(request,'signin/index.html',context={})
-@cache_control(no_cache=True, must_revalidate=True)
-@csrf_protect
-def signin(request):
-    global registered
-    message={'registered':registered,'pwd_change':pwd_change}
+def sign(request):
+    message={'cred_err':False}
     from django.apps import apps
 
     if request.user.is_authenticated:
         print("HoUSTON, WE HAVE A PROBLEM")
 
     if request.method=='POST':
-        user =authenticate(username=request.POST.get('email'),password=request.POST.get('pwd'))
-        if user:
-            if user.is_active:
+        if len(request.POST)==4:
+            user =authenticate(username=request.POST.get('email'),password=request.POST.get('pwd'))
+            if user:
                 login(request, user)
                 return redirect('home')
-        else:
-            message['cred_err']=True
+            else:
+                print("incofffffffffff")
+                message['cred_err']=True
 
-    return render(request,'signin/signin.html',context=message)
-@csrf_protect
-def password_reset(request):
-    if request.method=='POST':
-        print("INSIDE POST")
-        global sent
-        global fcode
-        global pwd_change_user
-        if sent==False:
+        # Sign up form here.
+        elif len(request.POST)==5:
+            # collecting details
+            Name=request.POST.get('name')
+            Email=request.POST.get('email')
             try:
                 user = User.objects.get(username=request.POST['email'])
-                fcode=randint(100000,999999)
-                mail=('Reset Password',"Hello "+user.first_name+" "+user.last_name+",\n\nForgot your password? No worries. Use this 6-digit code "+str(fcode)+" for resetting your password.",settings.EMAIL_HOST_USER,request.POST['email'])
-                send_mass_mail((mail,),fail_silently=False,)
-                sent=True
-                pwd_change_user=user
-                return render(request,'signin/fpwd.html',context={'err':False,'sent':True,'verified':False,'email':user})
+                return render(request,'signin/index.html',context={'exist':True})
             except:
-                return render(request,'signin/fpwd.html',context={'err':True,'sent':False})
+                import random, string
+                code=str(''.join(random.choices(string.ascii_uppercase+string.digits, k = 12)) )
+                send_mail(
+                    'Sign Up on JPIS Clubs',
+                    "Hello "+Name+"\n\nThank you for taking the first step. Your password for JPIS Clubs is "+str(code),
+                    settings.EMAIL_HOST_USER,[request.POST.get('email')]
+                    )
+                user = User.objects.create_user( username=Email,
+                first_name=Name, password=str(code))
+                user.set_password(str(code))
+                user.is_active = True
+                user.save()
+                return render(request,'signin/index.html',context={'sent':True})
 
-        else:
-            global verified
-            if verified==False:
-                if str(fcode)==request.POST['rcode']:
-                    verified=True
-                    return render(request,'signin/fpwd.html',
-                    context={'err':False,'sent':True,'verified':True})
-                else:
-                    return render(request,'signin/fpwd.html',
-                    context={'err':False,'sent':True,'verified':False,'verr':True})
-            else:
-                if request.POST['npwd']==request.POST['cnpwd']:
-                    global pwd_change
-                    pwd_change=True
-                    u = User.objects.get(username=pwd_change_user.username)
-                    u.set_password(request.POST['npwd'])
-                    u.save()
-                    sent = False
-                    return redirect('signin')
-                else:
-                    return render(request,'signin/fpwd.html',
-                    context={'err':False,'sent':True,'verified':True,'dpwderr':True})
-    print("Not posted yet")
-    return render(request,'signin/fpwd.html',context={'sent':False})
+    return render(request,'signin/index.html',context=message)
+
 
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
-@login_required
 def lg_out(request):
     request.session.flush()
     request.user = AnonymousUser
     logout(request)
-def signup(request):
 
-    if request.method=='POST':
-        global Class
-        global Email
-        global Password
-        global Name
-        Name=request.POST['name'].split()
-        Class=request.POST['grade']+"-"+request.POST['section']
-        Email=request.POST['email']
-        Password=request.POST['pwd']
-        error_dict={'name_err':"",'Name':Name,
-        'grade':request.POST['grade'],'section':request.POST['section'],
-        'Email':Email,'Password':Password}
-        if len(re.findall(r'\w+', request.POST['name']))==1:
-            error_dict['name_err']=True
-            error_dict['Name']=Name[0]
-            error_dict['errors']=True
-            return render(request,'signin/signup.html',
-            context=error_dict)
-        try:
-            user = User.objects.get(username=request.POST['email'])
-            return render(request,'signin/signup.html',context={'err':True})
-        except:
-            # Sending verification email
-            global code
-            code=randint(100000,999999)
-            mail=('Email Verification',"Hello "+Name[0]+" "+Name[1],"\n\nThank you for taking the first step. Your 6-digit code for email verification is "+str(code),settings.EMAIL_HOST_USER,[Email])
-            send_mass_mail((mail,),fail_silently=False,)
-            return redirect('code_verify')
-    return render(request,'signin/signup.html',context={'errors':False})
 
-def code_verify(request):
-    values={}
-    global v_msg
-    global Class
-    global Email
-    global Password
-    global Name
-    global registered
-    if request.method=='POST':
+# Dashboard views here
+from django.shortcuts import render,get_object_or_404,redirect
+from django.contrib.auth.models import User
+# from signin.models import profile
+from django.contrib import auth
+from django.core.mail import send_mass_mail
+from django.conf import settings
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
+from datetime import datetime
 
-        if request.POST['vcode']==str(code):
-            print("VERIFYIED")
-            user = User.objects.create_user( username=Email,
-            first_name=Name[0],last_name=Name[1],email=Email, password=Password)
-            user.set_password(Password)
-            user.is_active = True
-            user.save()
-            profile1=profile()
-            profile1.user=user
-            profile1.Class=Class
-            profile1.save()
-            print("user SAVED")
-            registered=True
-            print("FUCK IT")
-            return redirect('signin')
-        else:
-            values['err']=True
-            values['invalid']="The code is incorrect"
-            values['email']=Email
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='')
 
-    return render(request,'signin/email_verification.html',context=values)
+def home(request,**kargs):
+    user=request.user
+    x=int(datetime.now().hour)
+    greeting=" "
+    print(x)
+    if x<12 or x==24:
+        greeting="Good Morning"
+    elif x>=12  and x<=16:
+        greeting="Good Afternoon"
+    elif x>16 and x<20:
+        greeting="Good Evening"
+    elif x>=20 and x<24:
+        greeting="Good Night"
+    return render(request,'dashboard/home.html',{'fname':user.first_name,'h_active':'active','greet':greeting})
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='')
+
+def create(request,**kwargs):
+    if request.method =='POST':
+        club=clubs(clubimage=request.FILES['logo'],
+        clubname=request.POST.get('club_name'),
+        clubtagline=request.POST.get('club_moto'),
+        clubdesc=request.POST.get('club_descrip'),
+        memsize=request.POST.get('mem_size'),
+        nofevents=request.POST.get('meet_no'),
+        president=request.user.first_name,
+        contact_mail=request.user.username,
+        )
+        club.save()
+        return redirect('join')
+    return render(request,'dashboard/create.html',{'c_active':'active','bold':'bold'})
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='')
+
+def join(request,**kwargs):
+    all_clubs = clubs.objects.all()
+    print(all_clubs)
+    return render(request,'dashboard/join.html',{'j_active':'active','bold':'bold','clubs':all_clubs})
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='')
+
+def manage(request,**kwargs):
+    return render(request,'dashboard/manage.html',{'m_active':'active','bold':'bold'})
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required(login_url='')
+
+def notifications(request,**kwargs):
+    return render(request,'dashboard/notifications.html',{'n_active':'active','bold':'bold'})
+
+def profile(request,**kwargs):
+    return render(request,'dashboard/profile.html',{'bold':'bold'})

@@ -5,6 +5,27 @@
 <title>Create</title>
 {% endblock %}
 {%block css%}
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="{% static 'signin/css/bootstrap.min.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'signin/css/jquery-ui.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'signin/css/owl.carousel.min.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'signin/css/owl.theme.default.min.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'signin/css/owl.theme.default.min.css' %}?{% now 'U' %}">
+
+    <link rel="stylesheet" href="{% static 'signin/css/jquery.fancybox.min.css' %}?{% now 'U' %}">
+
+    <link rel="stylesheet" href="{% static 'signin/css/bootstrap-datepicker.css' %}?{% now 'U' %}">
+
+    <link rel="stylesheet" href="{% static 'signin/fonts/flaticon/font/flaticon.css' %}?{% now 'U' %}">
+
+    <link rel="stylesheet" href="{% static 'signin/css/aos.css' %}?{% now 'U' %}">
+
+    <link rel="stylesheet" href="{% static 'signin/css/style.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'signin/own.css' %}?{% now 'U' %}">
+    <link rel="stylesheet" href="{% static 'signin/main.css' %}?{% now 'U' %}">
+
 <link rel="stylesheet" href="{% static 'dashboard/create/create.css' %}">
 {%endblock%}
 {% block body %}
@@ -49,7 +70,7 @@
       </a>
       <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
         aria-labelledby="navbarDropdownMenuLink-55">
-        <a class="dropdown-item" href="{% url 'profile'  %}">Your Profile</a>
+        
         <a class="dropdown-item" href="{% url 'lg_out'%}">Log Out</a>
 
       </div>
@@ -60,13 +81,13 @@
   <h1 id="title">Create Your Dream.</h1>
 </div>
 <div class="container form jumbotron">
-
+  
     <form class="" action="{% url 'create'  %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       <div class="avtcontainer">
           <div class="avatar-upload">
               <div class="avatar-edit">
-                  <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                  <input name="logo" type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
                   <label for="imageUpload"></label>
               </div>
               <div class="avatar-preview">
@@ -78,23 +99,20 @@
       </div>
       <div class="inp">
         <label for="club_name">Name of the club/organisation</label><br>
-        <input type="text" id="club_name"name="club_name" value=""required><br>
+        <input type="text" id="club_moto"name="club_name" value=""><br>
       </div>
       <div class="inp">
-        <label for="club_moto">Add a moto for your club/organisation (optional)</label><br>
-        <input type="text" id="club_moto"name="club_moto" value=""><br>
+        <label for="club_moto">Add a motto for your club/organisation </label><br>
+        <input type="text" id="club_moto"name="club_moto" value="" required><br>
       </div>
       <div class="inp">
         <label for="descrip">Brief description of your club/organisation</label><br>
         <textarea name="club_descrip" id="descrip"required></textarea>
       </div>
-      <div class="inp">
-        <label for="purpose">Purpose of your club/organisation</label><br>
-        <textarea name="club_purpose" id="purpose"required></textarea>
-      </div>
+
       <div class="est inp">
         <div class="left">
-          <label for="mem_size">Estimated member size</label><br>
+          <label for="mem_size">Estimated number of members</label><br>
           <input type="text" onkeypress="return /[0-9]/i.test(event.key)" min="1" name="mem_size"id="mem_size" value=""required>
         </div>
         <div class="right">
@@ -102,11 +120,11 @@
           <input type="text" onkeypress="return /[0-9]/i.test(event.key)" min="1" name="meet_no"id="meet_no" value=""required>
         </div>
       </div>
-      <div class="inp">
-        <label for="activites">Activities the club or organisation anticipates for the coming year</label><br>
-        <textarea name="club_activites" id="Activities"required></textarea>
+
+      <!-- <input type="submit" class="btn btn-info" value="Create!"> -->
+      <div class="p-t-10">
+        <input name="signup"class="btn btn-primary mr-2 mb-2" type="submit" value="Create!">
       </div>
-      <input type="submit" class="btn btn-info" value="Create!">
     </form>
 
 

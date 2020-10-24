@@ -27,7 +27,7 @@ EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'jpisclubs@gmail.com'
+EMAIL_HOST_USER = 'jpisclub@gmail.com'
 EMAIL_HOST_PASSWORD = 'Sip@123456'
 GP_CLIENT_ID = '705621558989-toqc1js65eob5nukqb4g70cdd6pnnqa2.apps.googleusercontent.com'
 GP_CLIENT_SECRET = '_cONbbuH1QGu4poI9Vb4ZIfY'
@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'signin',
-    'dashboard',
     'django.contrib.sites',
     'allauth',
     'allauth.account',
@@ -154,7 +153,7 @@ MEDIA_URL = '/media/'
 SECRET_KEY = '@(g2e0_lg1i@3y1&u57hw)bzr#vnh1!-_j5x-vr7)%+o*%^c)%'
 ALLOWED_HOSTS = ['*']
 
-STATIC_ROOT=os.path.join(BASE_DIR,'static')
+# STATIC_ROOT=os.path.join(BASE_DIR,'static')
 LOGIN_URL='signin/signin.html'
 LOGIN_REDIRECT_URL = "/home"
 ACCOUNT_EMAIL_REQUIRED = True

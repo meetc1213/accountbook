@@ -1,11 +1,12 @@
 {% extends "dashboard/base.html" %}
 <!doctype html>
 {%load static %}
+
 {% block title %}
 <title>Join</title>
 {% endblock %}
 {%block css%}
-<link rel="stylesheet" href="{% static 'dashboard/join/join.css' %}">
+<link rel="stylesheet" href="{% static 'dashboard/join/join.css' %}?{% now 'U' %}">
 {%endblock%}
 {% block body %}
 <div class="bg other_tabs">
@@ -47,7 +48,7 @@
       </a>
       <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
         aria-labelledby="navbarDropdownMenuLink-55">
-        <a class="dropdown-item" href="{% url 'profile' %}">Your Profile</a>
+        
         <a class="dropdown-item" href="{% url 'lg_out'%}">Log Out</a>
 
       </div>
@@ -57,5 +58,35 @@
 </nav>
   <h1 id="title">Join to Learn.</h1>
 </div>
+
+{% for club in clubs %}
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne" style="background-color:rgba(214, 255, 249,0.3);">
+      <h5 class="mb-0">
+        
+        <img class="logo" style="width:115px;border-radius: 50%;" src="/media/{{club.clubimage}}"></img>
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{club.clubname}}" aria-expanded="false" aria-controls="collapse{{club.clubname}}">
+          <h3 style="color: #1f371b;"><b>{{club.clubname}}</b><br><br>{{club.clubtagline}}</h3>
+
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapse{{club.clubname}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <h5><b>Club President:</b> {{club.president}}</h5><br>
+        <h5><b>No.of members:</b> {{club.memsize}}</h5><br>
+        <h5><b>Nos of events per year:</b> {{club.nofevents}}</h5><br>
+        <h5><b>Contact Email:</b> {{club.contact_mail}}</h5><br>
+        
+        <h5>{{club.clubdesc}}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
 
 {% endblock %}
