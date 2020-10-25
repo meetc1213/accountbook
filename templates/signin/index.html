@@ -52,7 +52,7 @@
               {%csrf_token%}
               <div class="form-group">
                 <!-- pattern=".+jpischool.com" -->
-                  <input name="email" value=""placeholder="Email"title="Please use school email." class="form-control"required>
+                  <input name="email" pattern=".+jpischool.com"value=""placeholder="Email"title="Please use school email." class="form-control"required>
               </div>
               <div class="form-group">
                   <input type="password"  name="pwd" class="form-control" placeholder="Password" required>
