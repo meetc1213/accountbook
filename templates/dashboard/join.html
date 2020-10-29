@@ -65,14 +65,14 @@
       <h5 class="mb-0">
         
         <img class="logo" style="width:115px;border-radius: 50%;" src="/media/{{club.clubimage}}"></img>
-        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{club.clubname}}" aria-expanded="false" aria-controls="collapse{{club.clubname}}">
+        <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapse{{club.id}}" aria-expanded="false" aria-controls="collapse{{club.id}}">
           <h3 style="color: #1f371b;"><b>{{club.clubname}}</b><br><br>{{club.clubtagline}}</h3>
 
         </button>
       </h5>
     </div>
 
-    <div id="collapse{{club.clubname}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+    <div id="collapse{{club.id}}" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
       <div class="card-body">
         <h5><b>Club President:</b> {{club.president}}</h5><br>
         <h5><b>No.of members:</b> {{club.memsize}}</h5><br>
