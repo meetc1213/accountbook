@@ -9,10 +9,10 @@
     {%block title%}
     <title>Sign In</title>
     {%endblock%}
-    
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="fonts/icomoon/style.css">
@@ -39,6 +39,7 @@
       body, html,.contain{
         height: 100%;
         margin: 0px;
+        background-color: black;
       }
       .contain{
         display: flex;
@@ -47,22 +48,22 @@
       .blue{
         background-color: #344feb !important;
         height: 100%;
-        width: 50%;
+        width: 100%;
         color: white;
         display: flex;
         justify-content: center;
         align-content: center;
       }
-      .white{
+      /* .white{
         background-color: #ffffff!important;
-        
+
         height: 100%;
         width: 50%;
         color: black;
         display: flex;
         justify-content: center;
         align-content: center;
-      }
+      } */
       .carousel-control-next-icon, .carousel-control-prev-icon{
         background: #020000 no-repeat center center;
       }
@@ -84,40 +85,39 @@
         font-weight: bold;
       }
     </style>
-    
-    
-
     {%block css%}
     {%endblock%}
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-    {%block body%}
-    
 
-      <h1 style="width: 50%;position: absolute;color: white;text-align: center;top: 22%;font-family: poppins;">Sign In or Sign Up with Google</h1>
-      <div class="col s12 m6 offset-m3 center-align"style="position: absolute;width: 50%;background: white;top:50%">
-        <a class="oauth-container btn darken-4 white black-text" href="{% provider_login_url 'google' %}" 
-        style="text-transform:none;background-color: white !important;width: 100%;">
+      <h1 style="width: 100%;position: relative;color: white;text-align: center;top: 22%;font-family: poppins;">
+        Welcome to E-Account Book
+      </h1>
+      <h2 style="width: 100%;position: relative;color: white;text-align: center;top: 22%;font-family: poppins;">
+        Sign In or Sign Up with Google
+      </h1>
+      <div class="col s12 m6 offset-m3 center-align"style="position: absolute;width: 100%;top:50%">
+        <a class="oauth-container btn darken-4 white black-text" href="{% provider_login_url 'google' %}"
+        style="text-transform:none;width: 100%;">
             <div class="left">
-                <img width="20px" style="margin-top:7px; margin-right:8px; width: 150px;" alt="Google sign-in" 
+                <img width="20px" style="margin-top:7px; margin-right:8px; width: 150px;" alt="Google sign-in"
                     src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png" />
             </div><br>
         </a>
-    </div>
+      </div>
 
 
     <!-- <div class="body">
       <div i<a id="google"href="https://dev.to/gajesh/the-complete-django-allauth-guide-la3"target="blank"><h3>Gajesh</h3></a>
     <a id="google"href="https://learnbatta.com/blog/signup-sign-in-using-google-to-django-application-8/"target="blank"><h3>Gajesh</h3></a> -->
-    {%endblock%}
-    <div class="contain">
+    <!-- <div class="contain">
 
       <div class="blue">
         {%block blue%}
         {%endblock%}
 
-      </div>
-      <div class="white">
+      </div> -->
+      <!-- <div class="white">
         {%block white%}
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" style="width: 100%;">
           <div class="carousel-inner"style="display: flex;justify-content: center;">
@@ -125,15 +125,15 @@
               <div class="inside">
                 <img class="d-block w-100" src="{% static 'blockchain.png' %}" alt="First slide"style="width: 74% !important;">
               </div>
-              <h1 style="text-align: center;font-family: poppins;">Blockchain Technology.</h1>        
+              <h1 style="text-align: center;font-family: poppins;">Blockchain Technology.</h1>
             </div>
             <div class="carousel-item"style="height: 590px;">
               <div class="inside">
                 <img class="d-block w-100" src="{% static 'cloud.jpg' %}" alt="Second slide">
 
               </div>
-              <h1 style="text-align: center;font-family: poppins;">Secrure Cloud Storage.</h1>    
-              
+              <h1 style="text-align: center;font-family: poppins;">Secrure Cloud Storage.</h1>
+
             </div>
 
           </div>
@@ -148,10 +148,10 @@
         </div>
 
         {%endblock%}
-      </div>
-      
+      </div> -->
 
-    </div>
+
+    <!-- </div> -->
 
 
 
@@ -177,8 +177,8 @@
   <script src="{% static 'signin/js/jquery.fancybox.min.js' %}?{% now 'U' %}"></script>
   <script src="{% static 'signin/js/jquery.sticky.js' %}?{% now 'U' %}"></script>
 
-  
+
   <script src="{% static 'signin/js/main.js' %}?{% now 'U' %}"></script>
-    
+
   </body>
 </html>

@@ -30,15 +30,6 @@ def home(request,**kargs):
     user=request.user
     x=int(datetime.now().hour)
     greeting=" "
-    # print(x)
-    # if x<12 or x==24:
-    #     greeting="Good Morning"
-    # elif x>=12  and x<=16:
-    #     greeting="Good Afternoon"
-    # elif x>16 and x<20:
-    #     greeting="Good Evening"
-    # elif x>=20 and x<24:
-    #     greeting="Good Night"
     if request.method=='POST':
         print(request.POST)
         if int(request.POST.get('rad'))==0:
